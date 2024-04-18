@@ -1,0 +1,39 @@
+{% extends "library/base.html" %}
+{% load static %}
+
+{% block page_title %}
+My Books
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'library/style.css' %}">
+
+<table class="table" id="clickable_row">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Book</th>
+      <th scope="col">Notice</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for borrowing in borrowing_list %}
+    <tr>
+      <th scope="row">{{borrowing.id}}</th>
+      <td>{{ borrowing.book }}</td>
+      {% if borrowing.status == 1 %}
+        <td>Waiting for to be scheduled...</td>
+      {% elif borrowing.status == 2 %}
+        <td>Scheduled checkout date: {{ borrowing.date_borrowed }}</td>
+      {% elif borrowing.status == 3 %}
+        <td>Due day: {{ borrowing.due_day }}</td>
+      {% else %}
+        <td></td>
+      {% endif %}
+
+    </tr>
+	{% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

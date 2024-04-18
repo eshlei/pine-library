@@ -1,0 +1,35 @@
+{% extends "library/base.html" %}
+{% load static %}
+
+{% block page_title %}
+Schedule
+{% endblock %}
+
+{% block content %}
+<div class="row mb-5 pl-3">
+  <div>
+    <h5>Book</h5>
+    <p>{{ borrowing.book }}</p>
+    <img src="{{ borrowing.book.image.url }}" class="rounded mx-auto d-block" height=180 width=120>
+  </div>
+  <div class="col-2">
+    <h5>Borrower</h5>
+    <p>{{ borrowing.borrower }}</p>
+  </div>
+</div>
+
+<h5>Checkout Regulations</h5>
+<ul>
+  <li>Make sure the borrower has get the book</li>
+  <li>Close and lock the shelves</li>
+</ul>
+
+<form action="{% url 'library:checkout_detail' id %}" method="post">
+  {% csrf_token %}
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="check" name="check">
+    <label class="form-check-label mb-3" for="check">Complete</label>
+  </div>
+  <input type="submit" class="btn btn-primary" value="Schedule">
+</form>
+{% endblock %}

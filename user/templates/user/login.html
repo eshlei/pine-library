@@ -1,0 +1,12 @@
+<h1>Login</h1>
+<p>{{warning}}</p>
+<form action="{% url 'user:login' %}" method="post">
+	{% csrf_token %}
+	<label for="usn">username:</label>
+	<input type="text" id="usn" name="username" value="{{ usn }}">
+	<br>
+	<label for="pwd">password:</label>
+	<input type="password" id="pwd" name="password" value="{{ pwd }}">
+	<br>
+	<input type="submit" value="Login">
+</form>

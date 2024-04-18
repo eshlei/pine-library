@@ -1,0 +1,15 @@
+<h1>Register</h1>
+<p>{{warning}}</p>
+<form action="{% url 'user:register' %}" method="post">
+	{% csrf_token %}
+	<label for="usn">username:</label>
+	<input type="text" id="usn" name="username">
+	<br>
+	<label for="pwd">password:</label>
+	<input type="password" id="pwd" name="password">
+	<br>
+	<label for="rpwd">repeat password:</label>
+	<input type="password" id="rpwd" name="repeated_password">
+	<br>
+	<input type="submit" value="Register">
+</form>

@@ -1,0 +1,27 @@
+{% extends "library/base.html" %}
+{% load static %}
+
+{% block page_title %}
+Change Borrowing Status
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'library:status_detail' id %}" method="post">
+  {% csrf_token %}
+  <div class="alert alert-danger" role="alert">
+    Warning: Changing the status directly may cause problem to the system! Please ask your IT before changing.
+  </div>
+  <h5>Book</h5>
+  <p>{{ borrowing.book }}</p>
+  <h5>Borrower</h5>
+  <p>{{ borrowing.borrower }}</p>
+  <select name='status' class="custom-select mb-3 col-3">
+    <option value="4">Returned</option>
+    <option value="1">Reserved</option>
+    <option value="2">Scheduled</option>
+    <option value="3">Borrowed</option>
+  </select>
+  <br>
+  <input type="submit" value="Change" class="btn btn-danger">
+</form>
+{% endblock %}

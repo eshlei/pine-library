@@ -1,0 +1,31 @@
+{% extends "library/base.html" %}
+{% load static %}
+
+{% block page_title %}
+{{ book.name }}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'library/style.css' %}">
+
+<div class="row mb-3">
+	<div class="col-4">
+		<img src="{{ book.image.url }}" class="rounded img-fluid">
+	</div>
+	<div class="col-8">
+		<h5>Author</h5>
+		<p>{{ book.author }}</p>
+		<h5>ISBN</h5>
+		<p>{{ book.ISBN }}</p>
+		<h5>About</h5>
+		<p>{{ book.summary }}</p>
+		{% if book.borrowed %}
+		<a href="" class="btn btn-danger disable mb-5">Borrowed</a>
+		{% else %}
+		<a href="{% url 'library:reserve' book.id %}" class="btn btn-success mb-5">Reserve</a>
+		{% endif %}
+	</div>
+</div>
+
+
+{% endblock %}

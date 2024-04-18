@@ -1,0 +1,30 @@
+{% extends "library/base.html" %}
+{% load static %}
+
+{% block page_title %}
+Checkout
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'library/style.css' %}">
+
+<table class="table" id="clickable_row">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Borrower</th>
+      <th scope="col">Book</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for borrowing in borrowing_list %}
+    <tr>
+      <th scope="row"><a href="{% url 'library:checkout_detail' borrowing.id %}">{{borrowing.id}}</a></th>
+      <td>{{ borrowing.borrower }}</td>
+      <td>{{ borrowing.book }}</td>
+    </tr>
+	{% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

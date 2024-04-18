@@ -1,0 +1,64 @@
+{% extends "library/base.html" %}
+{% load static %}
+
+{% block page_title %}
+Welcome to the Library of CSDC
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'library/style.css' %}">
+
+<!--
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="{% static 'library/images/csdc_party_1.jpg' %}" alt="First slide" height=300>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'library/images/csdc_party_2.jpg' %}" alt="Second slide" height=300>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'library/images/csdc_party_3.jpg' %}" alt="Third slide" height=300>
+    </div>
+  </div>
+</div>
+-->
+
+<div class="center-block">
+  <form class="form-inline" method="get" action="{% url 'library:index' %}">
+    <label class="sr-only" for="search">Name</label>
+    <input type="text" class="form-control mb-2 mr-lg-2" id="search" name="query" placeholder="" value="{{query}}">
+
+    <button type="submit" class="btn btn-success mb-2">Search</button>
+  </form>
+</div>
+
+
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">ISBN</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for book in book_list %}
+    <tr>
+      <th scope="row">{{book.id}}</th>
+      <td><a href="{% url 'library:detail' book.id %}">{{ book.name }}
+      {% if book.borrowed %}
+    	<span class="badge badge-danger">Borrowed</span>
+      {% endif %}
+      </a></td>
+      <td>{{book.author}}</td>
+      <td>{{book.ISBN}}</td>
+    </tr>
+	{% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}
